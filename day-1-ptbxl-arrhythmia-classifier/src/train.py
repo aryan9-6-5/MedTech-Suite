@@ -31,6 +31,7 @@ def macro_auc(y, p):
 
 
 def main():
+    (ROOT / "results").mkdir(exist_ok=True)
     df, y = load_meta()
     tr, va, te = splits(df)
     x = standardize(load_signals(df), tr)
