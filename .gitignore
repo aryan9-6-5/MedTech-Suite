@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+*.npy
+*.pt
+*.part
+day-*/data/records100/
+day-*/data/urls.txt
+day-*/data/dl.log
+day-*/data/*.csv
