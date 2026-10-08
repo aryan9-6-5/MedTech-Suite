@@ -24,15 +24,19 @@ def load_meta():
     return df
 
 
-def make_splits(df, seed=42):
+def make_splits(df, seed=42, mode="grouped"):
     """70/15/15 split grouped by lesion_id.
 
     HAM10000 holds several photos of the same lesion. A random image-level split puts
     near-duplicates on both sides and inflates every metric, so whole lesions stay together.
     """
-    sgkf = StratifiedGroupKFold(n_splits=20, shuffle=True, random_state=seed)
     fold = np.zeros(len(df), dtype=int)
-    for k, (_, idx) in enumerate(sgkf.split(df, df.y, df.lesion_id)):
+    if mode == "random":  # deliberately leaky: ignores lesion_id. Only for the leakage comparison.
+        from sklearn.model_selection import StratifiedKFold
+        splitter = StratifiedKFold(n_splits=20, shuffle=True, random_state=seed).split(df, df.y)
+    else:
+        splitter = StratifiedGroupKFold(n_splits=20, shuffle=True, random_state=seed).split(df, df.y, df.lesion_id)
+    for k, (_, idx) in enumerate(splitter):
         fold[idx] = k
     split = np.where(fold < 14, "train", np.where(fold < 17, "val", "test"))
     return split

@@ -1,4 +1,5 @@
 import json
+import os
 import random
 
 import numpy as np
@@ -11,6 +12,8 @@ from sklearn.metrics import balanced_accuracy_score, roc_auc_score
 from data import CLASSES, ROOT, load_images, load_meta, make_splits
 
 SEED, EPOCHS, BS, LR = 42, 15, 64, 3e-4
+MODE = os.environ.get("SPLIT", "grouped")  # "random" = leaky comparison run
+TAG = "" if MODE == "grouped" else "_random"
 random.seed(SEED)
 np.random.seed(SEED)
 torch.manual_seed(SEED)
@@ -57,12 +60,15 @@ def macro_auc(y, p):
 def main():
     (ROOT / "results").mkdir(exist_ok=True)
     df = load_meta()
-    split = make_splits(df)
+    split = make_splits(df, SEED, MODE)
     X = torch.from_numpy(load_images(df))
     y = df.y.values
     tr, va, te = (np.where(split == s)[0] for s in ("train", "val", "test"))
     print({s: int((split == s).sum()) for s in ("train", "val", "test")}, flush=True)
-    assert not set(df.lesion_id[tr]) & set(df.lesion_id[te]) and not set(df.lesion_id[tr]) & set(df.lesion_id[va])
+    shared = len(set(df.lesion_id[tr]) & set(df.lesion_id[te]))
+    print(f"split={MODE}: lesions shared between train and test = {shared}", flush=True)
+    if MODE == "grouped":
+        assert shared == 0 and not set(df.lesion_id[tr]) & set(df.lesion_id[va])
 
     model = build_model().to(dev)
     freq = np.bincount(y[tr], minlength=len(CLASSES)) / len(tr)
@@ -94,9 +100,9 @@ def main():
         print(f"epoch {ep + 1:02d} val macro AUROC {auc:.4f}  bal.acc {hist[-1]['val_balanced_acc']:.3f}", flush=True)
         if auc > best:
             best = auc
-            torch.save(model.state_dict(), ROOT / "results" / "best.pt")
+            torch.save(model.state_dict(), ROOT / "results" / f"best{TAG}.pt")
 
-    model.load_state_dict(torch.load(ROOT / "results" / "best.pt", map_location=dev))
+    model.load_state_dict(torch.load(ROOT / "results" / f"best{TAG}.pt", map_location=dev))
     p = predict(model, X[te])  # test split touched once
     yt = y[te]
     rng = np.random.default_rng(SEED)
@@ -107,6 +113,7 @@ def main():
             boots.append(macro_auc(yt[b], p[b]))
     mel = CLASSES.index("mel")
     res = {
+        "split": MODE, "lesions_shared_train_test": shared,
         "best_val_macro_auc": best,
         "best_epoch": max(hist, key=lambda h: h["val_macro_auc"])["epoch"],
         "test_macro_auc": macro_auc(yt, p),
@@ -119,9 +126,9 @@ def main():
         "n_train": int(len(tr)), "n_val": int(len(va)), "n_test": int(len(te)),
         "history": hist,
     }
-    np.save(ROOT / "results" / "test_probs.npy", p)
-    np.save(ROOT / "results" / "test_idx.npy", te)
-    (ROOT / "results" / "metrics.json").write_text(json.dumps(res, indent=2))
+    np.save(ROOT / "results" / f"test_probs{TAG}.npy", p)
+    np.save(ROOT / "results" / f"test_idx{TAG}.npy", te)
+    (ROOT / "results" / f"metrics{TAG}.json").write_text(json.dumps(res, indent=2))
     print(json.dumps({k: v for k, v in res.items() if k != "history"}, indent=2))
 
 
