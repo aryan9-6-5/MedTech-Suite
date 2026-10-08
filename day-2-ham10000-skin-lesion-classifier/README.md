@@ -39,3 +39,5 @@ Things to know:
 - About 21% of true melanomas were called benign nevi (see `results/confusion.png`). That is the costly error here.
 - Grad-CAM (`results/gradcam_mel.png`) is a visualisation, not evidence of clinical reasoning. On the example shown, the highlighted region sits on the lesion border and a skin patch, not the darkest area. The missed melanoma was called actinic keratosis with 0.90 confidence.
 - One seed, one split, one dataset from a small number of sources. Not externally validated.
+
+Data: Tschandl, Rosendahl, Kittler. "The HAM10000 dataset" (2018), CC BY-NC 4.0. `results/gradcam_mel.png` contains two images from the dataset with Grad-CAM overlays.
