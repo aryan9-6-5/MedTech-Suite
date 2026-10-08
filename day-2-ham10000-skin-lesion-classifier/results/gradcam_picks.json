@@ -1,0 +1,14 @@
+[
+  {
+    "tag": "correct",
+    "image_id": "ISIC_0033999",
+    "pred": "mel",
+    "conf": 0.9856939911842346
+  },
+  {
+    "tag": "missed",
+    "image_id": "ISIC_0028519",
+    "pred": "akiec",
+    "conf": 0.9041725397109985
+  }
+]

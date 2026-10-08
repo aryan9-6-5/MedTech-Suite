@@ -18,3 +18,24 @@ cd src && python train.py && python evaluate.py
 ```
 
 The dataset is CC BY-NC 4.0 and is not redistributed here. Research prototype, not a medical device.
+
+## Results (single run, seed 42, test split used once)
+
+| | Split by lesion (honest) | Random split (leaky) |
+|---|---|---|
+| Lesions shared by train and test | 0 | 496 |
+| Test macro AUROC | **0.928** (95% CI 0.901 to 0.952) | 0.979 (95% CI 0.971 to 0.986) |
+| Balanced accuracy | 0.678 | 0.880 |
+| Accuracy | 0.783 | 0.905 |
+| Melanoma AUROC | 0.899 | 0.962 |
+| Melanoma recall (argmax) | 0.711 | 0.729 |
+
+Same model, data and hyperparameters. Only the split changed. The two test sets are different samples, so the gap is indicative, not a controlled paired comparison.
+
+Per-class AUROC (split by lesion): akiec 0.963, bcc 0.954, bkl 0.939, nv 0.939, vasc 0.937, mel 0.899, df 0.864.
+
+Things to know:
+- Validation macro AUROC peaked at epoch 5 (0.969) and settled near 0.95 afterwards. The saved model is the epoch-5 checkpoint chosen on validation, so validation is optimistic and the test number is the one to trust.
+- About 21% of true melanomas were called benign nevi (see `results/confusion.png`). That is the costly error here.
+- Grad-CAM (`results/gradcam_mel.png`) is a visualisation, not evidence of clinical reasoning. On the example shown, the highlighted region sits on the lesion border and a skin patch, not the darkest area. The missed melanoma was called actinic keratosis with 0.90 confidence.
+- One seed, one split, one dataset from a small number of sources. Not externally validated.

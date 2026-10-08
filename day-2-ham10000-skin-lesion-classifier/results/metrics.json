@@ -1,0 +1,112 @@
+{
+  "split": "grouped",
+  "lesions_shared_train_test": 0,
+  "best_val_macro_auc": 0.9694802651805191,
+  "best_epoch": 5,
+  "test_macro_auc": 0.9277178968929655,
+  "test_macro_auc_ci95": [
+    0.9005736157660205,
+    0.9520794463269989
+  ],
+  "test_balanced_acc": 0.677829119658733,
+  "test_accuracy": 0.783012607830126,
+  "test_auc_per_class": {
+    "akiec": 0.9631203263086335,
+    "bcc": 0.9536760955706381,
+    "bkl": 0.9386024451077402,
+    "df": 0.8636669727578818,
+    "mel": 0.8987400745422137,
+    "nv": 0.9390755409171914,
+    "vasc": 0.93714382304646
+  },
+  "melanoma_recall_at_argmax": 0.7112299465240641,
+  "test_class_counts": {
+    "akiec": 36,
+    "bcc": 71,
+    "bkl": 185,
+    "df": 22,
+    "mel": 187,
+    "nv": 978,
+    "vasc": 28
+  },
+  "n_train": 6984,
+  "n_val": 1524,
+  "n_test": 1507,
+  "history": [
+    {
+      "epoch": 1,
+      "val_macro_auc": 0.9252116118740605,
+      "val_balanced_acc": 0.509368093262637
+    },
+    {
+      "epoch": 2,
+      "val_macro_auc": 0.9174039905121832,
+      "val_balanced_acc": 0.6171690680508293
+    },
+    {
+      "epoch": 3,
+      "val_macro_auc": 0.9612376618932329,
+      "val_balanced_acc": 0.7269662574343602
+    },
+    {
+      "epoch": 4,
+      "val_macro_auc": 0.9550811119400523,
+      "val_balanced_acc": 0.6786770401665656
+    },
+    {
+      "epoch": 5,
+      "val_macro_auc": 0.9694802651805191,
+      "val_balanced_acc": 0.7447679023131739
+    },
+    {
+      "epoch": 6,
+      "val_macro_auc": 0.9508997935194864,
+      "val_balanced_acc": 0.7345639640556199
+    },
+    {
+      "epoch": 7,
+      "val_macro_auc": 0.9542300009486048,
+      "val_balanced_acc": 0.7486572272967111
+    },
+    {
+      "epoch": 8,
+      "val_macro_auc": 0.955071495687563,
+      "val_balanced_acc": 0.737140026283712
+    },
+    {
+      "epoch": 9,
+      "val_macro_auc": 0.9517601279179859,
+      "val_balanced_acc": 0.7901520632524301
+    },
+    {
+      "epoch": 10,
+      "val_macro_auc": 0.952984457690996,
+      "val_balanced_acc": 0.7915604789021762
+    },
+    {
+      "epoch": 11,
+      "val_macro_auc": 0.9487666277887453,
+      "val_balanced_acc": 0.7791067251831839
+    },
+    {
+      "epoch": 12,
+      "val_macro_auc": 0.9502644989720122,
+      "val_balanced_acc": 0.7681645540415809
+    },
+    {
+      "epoch": 13,
+      "val_macro_auc": 0.9505241612842854,
+      "val_balanced_acc": 0.791408851191074
+    },
+    {
+      "epoch": 14,
+      "val_macro_auc": 0.950075809427536,
+      "val_balanced_acc": 0.782245206816162
+    },
+    {
+      "epoch": 15,
+      "val_macro_auc": 0.9503202242799607,
+      "val_balanced_acc": 0.7909666441090278
+    }
+  ]
+}
