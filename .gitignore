@@ -9,3 +9,8 @@ day-*/data/dl.log
 day-*/data/*.csv
 *.tab
 *.zip
+*.npz
+*.joblib
+*.edf
+day-*/data/chbmit/
+day-*/data/cache/

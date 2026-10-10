@@ -1,0 +1,7 @@
+torch
+mne
+scipy
+numpy
+scikit-learn
+joblib
+matplotlib
