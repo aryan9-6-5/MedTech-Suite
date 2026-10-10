@@ -14,6 +14,8 @@ from model import EEGNet1D, normalise
 
 SEED, EPOCHS, BS, LR = 42, int(os.environ.get("EPOCHS", 15)), 256, 2e-3
 MODE = os.environ.get("SPLIT", "patient")
+SUF = os.environ.get("TAG", "")  # e.g. "_hn" for the hard-negative model
+HARD = bool(os.environ.get("HARD"))
 random.seed(SEED); np.random.seed(SEED); torch.manual_seed(SEED)
 dev = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -40,6 +42,14 @@ def main():
     res_dir = ROOT / "results"; res_dir.mkdir(exist_ok=True)
     X, y, c = load_cache()
     tr, va, te = (np.flatnonzero(m) for m in make_split(c, MODE))
+    if HARD:  # windows the v1 model got wrong on TRAIN recordings (see mine.py); always label 0
+        from data import CACHE, TRAIN
+        hx = [np.load(CACHE / f"hard_{c}.npz")["X"] for c in TRAIN if (CACHE / f"hard_{c}.npz").exists()]
+        hx = np.concatenate(hx)
+        n0 = len(X)
+        X = np.concatenate([X, hx]); y = np.concatenate([y, np.zeros(len(hx), y.dtype)])
+        tr = np.concatenate([tr, np.arange(n0, len(X))])
+        print(f"added {len(hx)} hard negatives", flush=True)
     print(f"mode={MODE} train={len(tr)} (pos {y[tr].sum()}) val={len(va)} test={len(te)}", flush=True)
 
     model = EEGNet1D().to(dev)
@@ -67,13 +77,13 @@ def main():
         print(f"epoch {ep + 1:02d} val AUPRC {m['auprc']:.4f} AUROC {m['auroc']:.4f}", flush=True)
         if m["auprc"] > best:
             best = m["auprc"]
-            torch.save(model.state_dict(), res_dir / f"cnn_{MODE}.pt")
+            torch.save(model.state_dict(), res_dir / f"cnn_{MODE}{SUF}.pt")
 
-    model.load_state_dict(torch.load(res_dir / f"cnn_{MODE}.pt", map_location=dev))
+    model.load_state_dict(torch.load(res_dir / f"cnn_{MODE}{SUF}.pt", map_location=dev))
     out = {"mode": MODE, "model": "cnn", "val_best_auprc": best,
            "best_epoch": max(hist, key=lambda h: h["auprc"])["epoch"], "test": wl_metrics(y[te], predict(model, X, te)),
            "history": hist}
-    (res_dir / f"windows_cnn_{MODE}.json").write_text(json.dumps(out, indent=2))
+    (res_dir / f"windows_cnn_{MODE}{SUF}.json").write_text(json.dumps(out, indent=2))
     print(json.dumps({k: v for k, v in out.items() if k != "history"}, indent=2))
 
 

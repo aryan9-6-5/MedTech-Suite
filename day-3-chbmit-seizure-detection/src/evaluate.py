@@ -11,13 +11,13 @@ SMOOTH, REFRACTORY, GRACE, FA_BUDGET = 5, 300, 30, 1.0  # seconds, seconds, seco
 THRS = 1 / (1 + np.exp(-np.linspace(-4, 9, 120)))
 
 
-def load(cases):
+def load(cases, sub="scores"):
     out = []
-    for f in sorted((R / "scores").glob("*.npz")):
+    for f in sorted((R / sub).glob("*.npz")):
         if f.name.split("__")[0] in cases:
             z = np.load(f)
             out.append({"case": f.name.split("__")[0], "file": f.name.split("__")[1][:-4], "cnn": z["cnn"].astype(np.float32),
-                        "base": z["base"].astype(np.float32), "dur": float(z["duration"]), "sz": z["seizures"]})
+                        "base": z["base"].astype(np.float32) if "base" in z.files else None, "dur": float(z["duration"]), "sz": z["seizures"]})
     return out
 
 
@@ -38,12 +38,12 @@ def alarms(s, t, thr):
     return np.array(out)
 
 
-def run(recs, key, thr):
+def run(recs, key, thr, k=SMOOTH):
     """Totals over recordings at one threshold. Alarm = smoothed probability crosses thr (5 min refractory)."""
     det = nsz = fa = 0
     hours, lat, per = 0.0, [], {}
     for r in recs:
-        s = smooth(r[key]); t = window_end_times(len(s))
+        s = smooth(r[key], k); t = window_end_times(len(s))
         al = alarms(s, t, thr)
         sz = r["sz"]
         excl = sum(min(off + GRACE, r["dur"]) - on for on, off in sz)
@@ -60,8 +60,8 @@ def run(recs, key, thr):
             "fa_per_hour": fa / max(hours, 1e-9), "median_latency_s": float(np.median(lat)) if lat else None, "per_case": per}
 
 
-def sweep(recs, key):
-    return [(thr, run(recs, key, thr)) for thr in THRS]
+def sweep(recs, key, k=SMOOTH):
+    return [(thr, run(recs, key, thr, k)) for thr in THRS]
 
 
 def pick(sw):
