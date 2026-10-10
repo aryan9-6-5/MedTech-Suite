@@ -1,0 +1,106 @@
+{
+  "settings": {
+    "smoothing_s": 5,
+    "refractory_s": 300,
+    "grace_s": 30,
+    "fa_budget_per_h": 1.0
+  },
+  "CNN": {
+    "threshold_from_val": 0.8816765575264535,
+    "test": {
+      "detected": 16,
+      "seizures": 35,
+      "sensitivity": 0.45714285714285713,
+      "false_alarms": 858,
+      "hours": 179.81833333333338,
+      "fa_per_hour": 4.771482329387992,
+      "median_latency_s": 24.5
+    },
+    "test_per_case": {
+      "chb03": {
+        "detected": 5,
+        "seizures": 7,
+        "false_alarms": 1,
+        "hours": 37.8,
+        "fa_per_24h": 0.63
+      },
+      "chb05": {
+        "detected": 1,
+        "seizures": 5,
+        "false_alarms": 402,
+        "hours": 38.8,
+        "fa_per_24h": 248.62
+      },
+      "chb10": {
+        "detected": 2,
+        "seizures": 7,
+        "false_alarms": 411,
+        "hours": 49.8,
+        "fa_per_24h": 197.91
+      },
+      "chb14": {
+        "detected": 0,
+        "seizures": 8,
+        "false_alarms": 34,
+        "hours": 25.9,
+        "fa_per_24h": 31.52
+      },
+      "chb20": {
+        "detected": 8,
+        "seizures": 8,
+        "false_alarms": 10,
+        "hours": 27.5,
+        "fa_per_24h": 8.74
+      }
+    }
+  },
+  "Baseline": {
+    "threshold_from_val": 0.7762069581820188,
+    "test": {
+      "detected": 13,
+      "seizures": 35,
+      "sensitivity": 0.37142857142857144,
+      "false_alarms": 707,
+      "hours": 179.81833333333338,
+      "fa_per_hour": 3.931745928761434,
+      "median_latency_s": 14.0
+    },
+    "test_per_case": {
+      "chb03": {
+        "detected": 7,
+        "seizures": 7,
+        "false_alarms": 5,
+        "hours": 37.8,
+        "fa_per_24h": 3.17
+      },
+      "chb05": {
+        "detected": 2,
+        "seizures": 5,
+        "false_alarms": 357,
+        "hours": 38.8,
+        "fa_per_24h": 220.79
+      },
+      "chb10": {
+        "detected": 4,
+        "seizures": 7,
+        "false_alarms": 250,
+        "hours": 49.8,
+        "fa_per_24h": 120.38
+      },
+      "chb14": {
+        "detected": 0,
+        "seizures": 8,
+        "false_alarms": 79,
+        "hours": 25.9,
+        "fa_per_24h": 73.24
+      },
+      "chb20": {
+        "detected": 0,
+        "seizures": 8,
+        "false_alarms": 16,
+        "hours": 27.5,
+        "fa_per_24h": 13.99
+      }
+    }
+  }
+}
