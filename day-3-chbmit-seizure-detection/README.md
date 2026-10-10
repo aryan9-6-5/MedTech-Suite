@@ -49,3 +49,12 @@ What this shows, and what it does not:
 - The hand-crafted baseline beat the CNN at window level (AUROC 0.850 vs 0.754), and the CNN caught more seizures at event level (16 vs 13) at a similar false-alarm rate. Neither model clearly dominates.
 - Likely next steps: hard-negative mining (background is sampled at only one window per minute in training), per-patient normalisation or calibration, and more patients in training.
 - One seed and one split; no confidence intervals.
+
+## Improvement pass (pre-registered)
+
+Written and committed before the run, so the target cannot move after seeing results.
+
+- **What changes:** hard-negative mining. The first model is run over the *training* recordings and its worst false positives (probability at least 0.5, at least 10 s apart, at most 25 per recording, never within 60 s of a seizure) are added to training as extra negatives. A second CNN is trained from scratch with them. Validation and test patients are never mined. The smoothing window (5, 15, 30 or 60 s) and the alarm threshold are chosen on the validation patients only.
+- **Success criteria, both required, on the same 5 held-out patients at the validation-selected operating point:** at most 2.0 false alarms per hour, and at least 40% of the 35 seizures detected (14 or more). For reference, the first model got 16 of 35 at 4.8 false alarms per hour.
+- **Decision rule:** if both criteria hold, the improved model becomes the headline result. If not, the first model stays the headline and the improvement pass is reported as an unsuccessful attempt.
+- **A caveat to keep in mind:** this idea was motivated by where the first model failed on these same test patients (false alarms concentrated in chb05 and chb10), so the second evaluation is less pristine than the first. To separate the effect of mining from post-processing, the first model is also re-evaluated with the same smoothing search.
