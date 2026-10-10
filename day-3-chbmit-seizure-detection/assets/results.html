@@ -1,0 +1,36 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700&family=Inter:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+html,body{width:1080px;height:1350px}
+body{background:#111214;font-family:'Inter',-apple-system,'Segoe UI',sans-serif;color:#f2f1ee;position:relative;overflow:hidden;-webkit-font-smoothing:antialiased}
+.disp{font-family:'Bricolage Grotesque','Inter',sans-serif;font-weight:700}
+h1{position:absolute;left:88px;top:90px;font-size:68px;line-height:1.02;letter-spacing:-.035em}
+h1 span{color:#8f8d88}
+.cols{position:absolute;left:88px;right:88px;top:320px;display:flex}
+.col{flex:1;min-width:0} .col+.col{padding-left:40px;border-left:1.5px solid #2c2d31}
+.num{font-size:160px;line-height:1;letter-spacing:-.05em}
+.lab{margin-top:14px;font-size:26px;font-weight:600}
+.sm{margin-top:4px;font-size:22px;font-weight:500;color:#8f8d88}
+.leak .num,.leak .lab{color:#6b6a66}
+.hd{position:absolute;left:88px;right:88px;top:640px;display:flex;font-size:20px;font-weight:600;color:#8f8d88;letter-spacing:.05em;text-transform:uppercase;padding-bottom:14px;border-bottom:1.5px solid #2c2d31}
+.hd span,.row span{flex:1} .hd span:first-child,.row .p{flex:.8}
+.tbl{position:absolute;left:88px;right:88px;top:685px}
+.row{display:flex;align-items:baseline;padding:11px 0;border-bottom:1.5px solid #1f2024}
+.row .p{font-size:28px;color:#b9b7b1;font-weight:500}
+.row .d,.row .f{font-family:'Bricolage Grotesque','Inter',sans-serif;font-weight:700;font-size:44px;letter-spacing:-.03em}
+.row .bad{color:#ff9f1c}
+.tot{position:absolute;left:88px;right:88px;top:1085px;font-size:27px;line-height:1.45;color:#b9b7b1;font-weight:500}
+.tot b{color:#f2f1ee}
+.foot{position:absolute;left:88px;right:88px;bottom:52px;display:flex;justify-content:space-between;font-size:22px;font-weight:500;color:#8f8d88}
+</style></head><body>
+<h1 class="disp">Same model.<br><span>Different split.</span></h1>
+<div class="cols">
+ <div class="col leak"><p class="num disp">0.997</p><p class="lab">Random windows</p><p class="sm">AUROC, same patients in train and test</p></div>
+ <div class="col"><p class="num disp">0.754</p><p class="lab">Held-out patients</p><p class="sm">AUROC, 5 patients never seen</p></div>
+</div>
+<div class="hd"><span>Held-out patient</span><span>Seizures caught</span><span>False alarms / 24 h</span></div>
+<div class="tbl"><div class="row"><span class="p">chb03</span><span class="d">5 of 7</span><span class="f">1</span></div><div class="row"><span class="p">chb05</span><span class="d">1 of 5</span><span class="f bad">249</span></div><div class="row"><span class="p">chb10</span><span class="d">2 of 7</span><span class="f bad">198</span></div><div class="row"><span class="p">chb14</span><span class="d">0 of 8</span><span class="f">32</span></div><div class="row"><span class="p">chb20</span><span class="d">8 of 8</span><span class="f">9</span></div></div>
+<p class="tot"><b>16 of 35</b> seizures caught, <b>4.8</b> false alarms per hour overall. 95% of the false alarms come from two patients.</p>
+<div class="foot"><span>Project 3 of 5</span><span>github.com/aryan9-6-5/MedTech-Suite</span></div>
+</body></html>
