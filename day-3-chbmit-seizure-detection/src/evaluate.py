@@ -22,12 +22,11 @@ def load(cases, sub="scores"):
 
 
 def smooth(p, k=SMOOTH):
-    c = np.cumsum(np.insert(p, 0, 0.0))  # trailing mean: causal
-    s = np.empty_like(p)
-    for i in range(len(p)):
-        lo = max(0, i - k + 1)
-        s[i] = (c[i + 1] - c[lo]) / (i + 1 - lo)
-    return s
+    """Trailing (causal) moving average, vectorised."""
+    c = np.cumsum(np.insert(p, 0, 0.0))
+    i = np.arange(len(p))
+    lo = np.maximum(0, i - k + 1)
+    return (c[i + 1] - c[lo]) / (i + 1 - lo)
 
 
 def alarms(s, t, thr):
@@ -43,7 +42,10 @@ def run(recs, key, thr, k=SMOOTH):
     det = nsz = fa = 0
     hours, lat, per = 0.0, [], {}
     for r in recs:
-        s = smooth(r[key], k); t = window_end_times(len(s))
+        cache = r.setdefault("_s", {})  # smoothed series are reused across thresholds
+        if (key, k) not in cache:
+            cache[(key, k)] = smooth(r[key], k)
+        s = cache[(key, k)]; t = window_end_times(len(s))
         al = alarms(s, t, thr)
         sz = r["sz"]
         excl = sum(min(off + GRACE, r["dur"]) - on for on, off in sz)
