@@ -1,0 +1,11 @@
+{
+  "mode": "patient",
+  "model": "cnn_hard_negative",
+  "test": {
+    "auroc": 0.7747335302843325,
+    "auprc": 0.4942657613661601,
+    "prevalence": 0.14847161572052403,
+    "n": 12595,
+    "n_pos": 1870
+  }
+}
