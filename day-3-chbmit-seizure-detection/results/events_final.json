@@ -1,0 +1,46 @@
+{
+  "variant": "rel",
+  "smoothing_s": 15,
+  "threshold": 0.6914106898598038,
+  "detected": 25,
+  "seizures": 35,
+  "sensitivity": 0.7142857142857143,
+  "false_alarms": 96,
+  "hours": 179.81833333333338,
+  "fa_per_hour": 0.5338721487427124,
+  "median_latency_s": 18.0,
+  "per_patient": {
+    "chb03": {
+      "detected": 7,
+      "seizures": 7,
+      "false_alarms": 1,
+      "fa_per_24h": 0.63
+    },
+    "chb05": {
+      "detected": 3,
+      "seizures": 5,
+      "false_alarms": 83,
+      "fa_per_24h": 51.33
+    },
+    "chb10": {
+      "detected": 7,
+      "seizures": 7,
+      "false_alarms": 9,
+      "fa_per_24h": 4.33
+    },
+    "chb14": {
+      "detected": 0,
+      "seizures": 8,
+      "false_alarms": 2,
+      "fa_per_24h": 1.85
+    },
+    "chb20": {
+      "detected": 8,
+      "seizures": 8,
+      "false_alarms": 1,
+      "fa_per_24h": 0.87
+    }
+  },
+  "test_criteria_met": true,
+  "forced": false
+}

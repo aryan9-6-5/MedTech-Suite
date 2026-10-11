@@ -1,0 +1,264 @@
+{
+  "criteria": {
+    "max_fa_per_hour": 2.0,
+    "min_sensitivity": 0.5
+  },
+  "z": {
+    "smoothing_s": 15,
+    "threshold": 0.5105026565997594,
+    "files": 516,
+    "detected": 68,
+    "seizures": 150,
+    "sensitivity": 0.4533333333333333,
+    "false_alarms": 1226,
+    "hours": 786.1924999999997,
+    "fa_per_hour": 1.5594145199807943,
+    "median_latency_s": 19.0,
+    "per_patient": {
+      "chb01": {
+        "detected": 7,
+        "seizures": 7,
+        "false_alarms": 23,
+        "fa_per_24h": 13.67
+      },
+      "chb02": {
+        "detected": 2,
+        "seizures": 3,
+        "false_alarms": 36,
+        "fa_per_24h": 24.55
+      },
+      "chb04": {
+        "detected": 4,
+        "seizures": 4,
+        "false_alarms": 221,
+        "fa_per_24h": 34.02
+      },
+      "chb06": {
+        "detected": 2,
+        "seizures": 10,
+        "false_alarms": 3,
+        "fa_per_24h": 1.08
+      },
+      "chb07": {
+        "detected": 3,
+        "seizures": 3,
+        "false_alarms": 55,
+        "fa_per_24h": 19.72
+      },
+      "chb08": {
+        "detected": 5,
+        "seizures": 5,
+        "false_alarms": 11,
+        "fa_per_24h": 13.39
+      },
+      "chb09": {
+        "detected": 2,
+        "seizures": 4,
+        "false_alarms": 501,
+        "fa_per_24h": 177.45
+      },
+      "chb11": {
+        "detected": 3,
+        "seizures": 3,
+        "false_alarms": 29,
+        "fa_per_24h": 20.15
+      },
+      "chb12": {
+        "detected": 0,
+        "seizures": 27,
+        "false_alarms": 1,
+        "fa_per_24h": 1.19
+      },
+      "chb13": {
+        "detected": 1,
+        "seizures": 12,
+        "false_alarms": 1,
+        "fa_per_24h": 0.73
+      },
+      "chb15": {
+        "detected": 12,
+        "seizures": 20,
+        "false_alarms": 167,
+        "fa_per_24h": 102.01
+      },
+      "chb16": {
+        "detected": 1,
+        "seizures": 10,
+        "false_alarms": 11,
+        "fa_per_24h": 13.97
+      },
+      "chb17": {
+        "detected": 3,
+        "seizures": 3,
+        "false_alarms": 134,
+        "fa_per_24h": 153.87
+      },
+      "chb18": {
+        "detected": 6,
+        "seizures": 6,
+        "false_alarms": 15,
+        "fa_per_24h": 10.14
+      },
+      "chb19": {
+        "detected": 3,
+        "seizures": 3,
+        "false_alarms": 1,
+        "fa_per_24h": 0.8
+      },
+      "chb21": {
+        "detected": 0,
+        "seizures": 4,
+        "false_alarms": 0,
+        "fa_per_24h": 0.0
+      },
+      "chb22": {
+        "detected": 3,
+        "seizures": 3,
+        "false_alarms": 1,
+        "fa_per_24h": 0.78
+      },
+      "chb23": {
+        "detected": 7,
+        "seizures": 7,
+        "false_alarms": 16,
+        "fa_per_24h": 14.56
+      },
+      "chb24": {
+        "detected": 4,
+        "seizures": 16,
+        "false_alarms": 0,
+        "fa_per_24h": 0.0
+      }
+    }
+  },
+  "rel": {
+    "smoothing_s": 15,
+    "threshold": 0.6914106898598038,
+    "files": 516,
+    "detected": 81,
+    "seizures": 150,
+    "sensitivity": 0.54,
+    "false_alarms": 558,
+    "hours": 786.1924999999997,
+    "fa_per_hour": 0.7097498386209488,
+    "median_latency_s": 15.0,
+    "per_patient": {
+      "chb01": {
+        "detected": 5,
+        "seizures": 7,
+        "false_alarms": 5,
+        "fa_per_24h": 2.97
+      },
+      "chb02": {
+        "detected": 2,
+        "seizures": 3,
+        "false_alarms": 0,
+        "fa_per_24h": 0.0
+      },
+      "chb04": {
+        "detected": 4,
+        "seizures": 4,
+        "false_alarms": 69,
+        "fa_per_24h": 10.62
+      },
+      "chb06": {
+        "detected": 0,
+        "seizures": 10,
+        "false_alarms": 0,
+        "fa_per_24h": 0.0
+      },
+      "chb07": {
+        "detected": 3,
+        "seizures": 3,
+        "false_alarms": 63,
+        "fa_per_24h": 22.59
+      },
+      "chb08": {
+        "detected": 5,
+        "seizures": 5,
+        "false_alarms": 3,
+        "fa_per_24h": 3.65
+      },
+      "chb09": {
+        "detected": 4,
+        "seizures": 4,
+        "false_alarms": 116,
+        "fa_per_24h": 41.09
+      },
+      "chb11": {
+        "detected": 2,
+        "seizures": 3,
+        "false_alarms": 1,
+        "fa_per_24h": 0.69
+      },
+      "chb12": {
+        "detected": 0,
+        "seizures": 27,
+        "false_alarms": 0,
+        "fa_per_24h": 0.0
+      },
+      "chb13": {
+        "detected": 1,
+        "seizures": 12,
+        "false_alarms": 1,
+        "fa_per_24h": 0.73
+      },
+      "chb15": {
+        "detected": 16,
+        "seizures": 20,
+        "false_alarms": 145,
+        "fa_per_24h": 88.57
+      },
+      "chb16": {
+        "detected": 2,
+        "seizures": 10,
+        "false_alarms": 47,
+        "fa_per_24h": 59.7
+      },
+      "chb17": {
+        "detected": 3,
+        "seizures": 3,
+        "false_alarms": 91,
+        "fa_per_24h": 104.5
+      },
+      "chb18": {
+        "detected": 6,
+        "seizures": 6,
+        "false_alarms": 8,
+        "fa_per_24h": 5.41
+      },
+      "chb19": {
+        "detected": 3,
+        "seizures": 3,
+        "false_alarms": 0,
+        "fa_per_24h": 0.0
+      },
+      "chb21": {
+        "detected": 1,
+        "seizures": 4,
+        "false_alarms": 0,
+        "fa_per_24h": 0.0
+      },
+      "chb22": {
+        "detected": 3,
+        "seizures": 3,
+        "false_alarms": 0,
+        "fa_per_24h": 0.0
+      },
+      "chb23": {
+        "detected": 7,
+        "seizures": 7,
+        "false_alarms": 6,
+        "fa_per_24h": 5.46
+      },
+      "chb24": {
+        "detected": 14,
+        "seizures": 16,
+        "false_alarms": 3,
+        "fa_per_24h": 6.14
+      }
+    }
+  },
+  "best_variant": "rel",
+  "criteria_met": true
+}
