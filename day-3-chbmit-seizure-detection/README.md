@@ -24,6 +24,8 @@ Research prototype, not a medical device. With a few seizures per patient, confi
 
 ## Results (single run, seed 42; 5 held-out patients, 35 seizures, about 180 h)
 
+> **Update:** the headline result is now Experiment 2 at the bottom of this file. The tables in this first section are the original model and are kept for the record.
+
 Window-level (every seizure window plus sparse background windows):
 
 | Model | Split | AUROC | AUPRC | Seizure prevalence |
@@ -81,3 +83,31 @@ Written and committed before the run. The 5 test patients were already seen in e
 - **Development criterion:** the better variant detects at least 50% of the 163 development seizures at no more than 2.0 false alarms per hour, with smoothing (5, 15, 30 or 60 s) and threshold chosen on the same out-of-fold scores. That is a mild optimism, with two parameters chosen on 163 seizures.
 - **Test criterion (only if the above holds):** train on all 19 development patients, apply the chosen operating point unchanged to the 5 test patients, and require at least 14 of 35 seizures at no more than 2.0 false alarms per hour.
 - **Decision rule:** if the development criterion is not met, the first model stays the headline, whatever else is learned.
+
+### Experiment 2 results: criteria met
+
+**Development (5-fold patient-grouped cross-validation, 19 patients, every patient held out once):**
+
+| Input | Seizures detected | False alarms / hour | Median latency |
+|---|---|---|---|
+| z-score only (as before) | 68 of 150 (45.3%) | 1.56 | 19 s |
+| z-score + baseline-relative | **81 of 150 (54.0%)** | **0.71** | 15 s |
+
+**Test (5 held-out patients, scored once with the operating point fixed from cross-validation: 15 s smoothing, threshold 0.69):**
+
+| Model | Seizures detected | False alarms / hour | Median latency |
+|---|---|---|---|
+| First CNN | 16 of 35 | 4.8 | 24.5 s |
+| Hard-negative CNN | 18 of 35 | 3.9 | 19.5 s |
+| **Baseline-relative CNN** | **25 of 35 (71%)** | **0.53** | 18 s |
+
+Per test patient (detected / seizures, false alarms per 24 h): chb03 7/7, 0.6; chb05 3/5, 51; chb10 7/7, 4.3; chb14 0/8, 1.9; chb20 8/8, 0.9.
+
+Both pre-registered criteria were met: the development criterion (at least 50% at no more than 2.0 false alarms per hour) and the test criterion (at least 14 of 35 at no more than 2.0 per hour). The only change from the first model is the input: the same window divided by the patient's own causal baseline, which keeps the amplitude information that per-window z-scoring removes.
+
+Things to know, stated plainly:
+- **A denominator detail in the development gate.** 13 of the 40 seizures in chb12 are in recordings that could not be read (missing the 18-channel montage), so they were excluded from both training and evaluation; 150 of the 163 development seizures were evaluable. The code applied the 50% threshold to the 150 (54.0%). Against all 163 it would be 81 of 163 (49.7%), just under 50%. The test patients had no unreadable seizures (35 of 35 evaluated), and the test result passes its criterion on its own.
+- **Wide uncertainty.** A bootstrap over the 19 development patients gives a 95% interval of roughly 31% to 80% for pooled sensitivity. With only 5 test patients any test number is imprecise.
+- **Patient variation remains large.** Averaged per patient, development sensitivity is 70%, but 2 of 19 development patients (and 1 of 5 test patients, chb14) had no seizure detected, and about 4 of 19 produced more than 24 false alarms per day. Pooled figures are pulled up by patients with many well-detected seizures.
+- **The test patients are not pristine.** They were seen in experiments 1 and 2, and the second experiment was motivated by their errors. This final scoring used a threshold fixed on cross-validation and was run once, which limits but does not remove that influence.
+- One seed, one dataset, no external validation. Research prototype, not a medical device.
