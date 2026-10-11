@@ -58,3 +58,17 @@ Written and committed before the run, so the target cannot move after seeing res
 - **Success criteria, both required, on the same 5 held-out patients at the validation-selected operating point:** at most 2.0 false alarms per hour, and at least 40% of the 35 seizures detected (14 or more). For reference, the first model got 16 of 35 at 4.8 false alarms per hour.
 - **Decision rule:** if both criteria hold, the improved model becomes the headline result. If not, the first model stays the headline and the improvement pass is reported as an unsuccessful attempt.
 - **A caveat to keep in mind:** this idea was motivated by where the first model failed on these same test patients (false alarms concentrated in chb05 and chb10), so the second evaluation is less pristine than the first. To separate the effect of mining from post-processing, the first model is also re-evaluated with the same smoothing search.
+
+### Improvement pass result: criteria not met
+
+| Model (held-out patients) | Seizures detected | False alarms / hour | Window AUPRC |
+|---|---|---|---|
+| First CNN (5 s smoothing), the headline result | 16 of 35 | 4.8 | 0.401 |
+| First CNN, smoothing tuned on validation (15 s) | 14 of 35 | 4.2 | |
+| Hard-negative CNN, smoothing tuned on validation (15 s) | 18 of 35 | 3.9 | 0.494 |
+
+Pre-registered target: at most 2.0 false alarms per hour and at least 14 of 35 seizures. The hard-negative model met the sensitivity half (18 of 35) but not the false-alarm half (3.9 per hour), so by the decision rule **the first model remains the headline result** and this pass is reported as an unsuccessful attempt.
+
+It did help modestly: window AUPRC rose from 0.401 to 0.494 and AUROC from 0.754 to 0.775, and it caught more seizures at a lower false-alarm rate than the first model. But the false alarms did not go away. Two patients still dominate: after mining, chb05 produced about 239 false alarms per day and chb10 about 139 (first model: 249 and 198). The false-alarm problem looks patient-specific, not a lack of hard negatives in general.
+
+A second finding is about the validation set. The thresholds chosen on the 3 validation patients gave only 0.07 to 0.2 false alarms per hour with 100% sensitivity, which did not transfer to the test patients (3.9 to 4.2 per hour). Three validation patients were too easy a proxy. Choosing the operating point by leave-patient-out cross-validation over many more patients, or calibrating per patient, would be the next experiments. Neither was run.
