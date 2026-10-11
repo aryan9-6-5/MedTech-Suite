@@ -71,3 +71,41 @@ def windows(x):
 def window_end_times(n):
     """Time (s) at which each window is complete; alarms are stamped here so detection is causal."""
     return np.arange(n) * (HOP / FS) + WIN / FS
+
+
+# ---- experiment 2: express each window relative to the patient's own background -----------------------------------
+DEV = [c for c in CASES if c not in TEST]  # 19 cases; chb01 and chb21 share a subject
+
+
+def baseline_scale(x):
+    """(18, N) -> (S, 18): causal per-channel RMS baseline, one value per second.
+
+    The median RMS over the 10 minutes ending 30 s ago, so a seizure does not inflate its own baseline.
+    The first 90 s fall back to the median of the first 2 min of the file (mildly non-causal).
+    """
+    import pandas as pd
+
+    S = x.shape[1] // FS
+    rms = np.sqrt((x[:, : S * FS].reshape(x.shape[0], S, FS) ** 2).mean(-1))
+    df = pd.DataFrame(rms.T)
+    base = df.shift(30).rolling(570, min_periods=60).median().fillna(df.iloc[:120].median())
+    return base.to_numpy().astype(np.float32)
+
+
+def window_baseline(B, n):
+    """(n, 18): baseline in force when each window (seconds i to i+4) completes."""
+    return B[np.minimum(np.arange(n) + 3, len(B) - 1)]
+
+
+def dev_folds(k=5):
+    """Greedy balance of seizure counts across k folds, grouped by subject. Deterministic."""
+    n = {c: sum(len(v) for v in parse_summary(c).values()) for c in DEV}
+    groups = {}
+    for c in DEV:
+        groups.setdefault(subject(c), []).append(c)
+    load, folds = [0] * k, [[] for _ in range(k)]
+    for g in sorted(groups, key=lambda g: -sum(n[c] for c in groups[g])):
+        i = int(np.argmin(load))
+        folds[i] += groups[g]
+        load[i] += sum(n[c] for c in groups[g])
+    return folds
