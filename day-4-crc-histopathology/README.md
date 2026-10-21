@@ -31,3 +31,22 @@ Question: does stain-robust augmentation improve generalisation to new patients?
 Colab (T4): open `train_colab.ipynb` and run the cells in order. About 15 GB of downloads (Hugging Face), then roughly 1 hour in total. Locally: `pip install -r requirements.txt`, then from `src/`: `python data.py`, `ARM=A SEED=42 python train.py` (and B, and seed 7), `python evaluate.py`, `python leak.py`, `python gradcam.py`.
 
 Research prototype, not a medical device.
+
+## Results (2 seeds per arm, external set used once per run)
+
+| | Internal test (same 86 slides, optimistic) | External (50 new patients) |
+|---|---|---|
+| Geometry only (arm A), macro-F1 | 0.9968 | **0.9673** (accuracy 0.9772) |
+| Geometry + stain jitter (arm B), macro-F1 | 0.9964 | 0.9689 (accuracy 0.9779) |
+
+**Pre-registered decision: not met.** Arm B beat arm A on external macro-F1 by +0.13 and +0.18 points (seeds 42 and 7); the target was at least +1.0 point on average and in both seeds. Stain augmentation is therefore reported as showing **no clear gain**, and arm A stays the headline. Patch-level bootstrap interval for arm A external macro-F1: about 0.961 to 0.973 per seed (optimistic, see below).
+
+**Where the gap is.** External recall per class, arm A, mean of two seeds: background and debris 100%, lymphocytes 99.9%, adipose 99.6%, smooth muscle 98.6%, mucus 98.4%, tumour 98.3%, normal mucosa 98.2%, and **cancer stroma 76.8%**. Internally, stroma recall is 99.5%. In the seed-42 confusion matrix, 20% of external stroma patches are called smooth muscle. Arm B seed 42 moved that boundary (stroma recall 84.3%, smooth-muscle recall 91.6%): a trade-off, not a clear gain. Per-class numbers for arm B seed 7 were not recoverable from the notebook printout (it was truncated); its aggregate numbers were.
+
+**How close are test patches to the training set?** Nearest-neighbour cosine similarity in the fine-tuned model's embedding space: median 0.994 for internal test patches against 0.986 for external; 96.7% of internal patches have a training neighbour above 0.95, against 85.1% of external ones. Absolute values are high for any pair of patches, so read the difference, not the level.
+
+**Caveats.**
+- The internal split shares slides with training by construction (no slide IDs exist), so internal numbers are optimistic. The external set is the result.
+- External patients come from the same tissue bank as the training slides: new patients, not a new hospital. External patch IDs carry no patient ID, so the bootstrap interval treats correlated patches as independent and is too narrow.
+- Two seeds per arm. Grad-CAM (`results/gradcam_external.png`) uses a 7x7 feature map and mostly highlights patch borders; treat it as illustration, not evidence of how the model reasons.
+- Research prototype, not a medical device.
