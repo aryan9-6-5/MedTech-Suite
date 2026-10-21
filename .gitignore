@@ -14,3 +14,4 @@ day-*/data/*.csv
 *.edf
 day-*/data/chbmit/
 day-*/data/cache/
+day-*/data/hf/

@@ -1,0 +1,8 @@
+torch
+torchvision
+numpy
+pyarrow
+pillow
+huggingface_hub
+scikit-learn
+matplotlib
