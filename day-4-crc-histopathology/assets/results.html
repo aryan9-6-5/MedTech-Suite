@@ -1,0 +1,37 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700&family=Inter:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+html,body{width:1080px;height:1350px}
+body{background:#f6f1ee;font-family:'Inter',-apple-system,'Segoe UI',sans-serif;color:#2a1f26;position:relative;overflow:hidden;-webkit-font-smoothing:antialiased}
+.d{font-family:'Bricolage Grotesque','Inter',sans-serif;font-weight:700}
+h1{position:absolute;left:100px;top:84px;font-size:70px;line-height:1.02;letter-spacing:-.035em}
+h1 span{color:#9b3d6a}
+.cols{position:absolute;left:100px;right:100px;top:290px;display:flex}
+.col{flex:1;min-width:0} .col+.col{padding-left:40px;border-left:1.5px solid #dccfd3}
+.num{font-size:150px;line-height:1;letter-spacing:-.05em}
+.lab{margin-top:12px;font-size:25px;font-weight:600}
+.sm{margin-top:4px;font-size:21px;color:#6d5a66;font-weight:500}
+.col:first-child .num{color:#b7a3ad} .col:first-child .lab{color:#8a7580}
+.cap{position:absolute;left:100px;top:585px;font-size:22px;font-weight:600;color:#6d5a66;letter-spacing:.04em;text-transform:uppercase}
+.bars{position:absolute;left:100px;right:100px;top:632px}
+.r{display:flex;align-items:center;height:50px;gap:18px}
+.n{width:190px;font-size:25px;font-weight:500;color:#4a3a44}
+.b{flex:1;height:22px;background:#eadfe3;border-radius:11px;overflow:hidden}
+.b i{display:block;height:100%;background:#c7a9b8;border-radius:11px}
+.v{width:84px;text-align:right;font-family:'Bricolage Grotesque','Inter',sans-serif;font-weight:700;font-size:29px;letter-spacing:-.02em}
+.hot .n{color:#9b3d6a;font-weight:600} .hot .b i{background:#9b3d6a} .hot .v{color:#9b3d6a}
+.note{position:absolute;left:100px;right:100px;top:1112px;font-size:25px;line-height:1.5;color:#4a3a44;font-weight:500;padding-top:22px;border-top:1.5px solid #dccfd3}
+.note b{color:#2a1f26}
+.foot{position:absolute;left:100px;right:100px;bottom:48px;display:flex;justify-content:space-between;font-size:21px;font-weight:500;color:#6d5a66}
+</style></head><body>
+<h1 class="d">Where the drop<br><span>comes from.</span></h1>
+<div class="cols">
+ <div class="col"><p class="num d">0.997</p><p class="lab">Internal macro-F1</p><p class="sm">patches from the same slides</p></div>
+ <div class="col"><p class="num d">0.967</p><p class="lab">External macro-F1</p><p class="sm">50 patients the model never saw</p></div>
+</div>
+<p class="cap">External recall per class, mean of 2 seeds</p>
+<div class="bars"><div class="r hot"><span class="n">cancer stroma</span><span class="b"><i style="width:76.8%"></i></span><span class="v">76.8%</span></div><div class="r"><span class="n">normal mucosa</span><span class="b"><i style="width:98.2%"></i></span><span class="v">98.2%</span></div><div class="r"><span class="n">tumour</span><span class="b"><i style="width:98.3%"></i></span><span class="v">98.3%</span></div><div class="r"><span class="n">mucus</span><span class="b"><i style="width:98.4%"></i></span><span class="v">98.4%</span></div><div class="r"><span class="n">smooth muscle</span><span class="b"><i style="width:98.6%"></i></span><span class="v">98.6%</span></div><div class="r"><span class="n">adipose</span><span class="b"><i style="width:99.6%"></i></span><span class="v">99.6%</span></div><div class="r"><span class="n">lymphocytes</span><span class="b"><i style="width:99.9%"></i></span><span class="v">99.9%</span></div><div class="r"><span class="n">background</span><span class="b"><i style="width:100.0%"></i></span><span class="v">100.0%</span></div><div class="r"><span class="n">debris</span><span class="b"><i style="width:100.0%"></i></span><span class="v">100.0%</span></div></div>
+<p class="note"><b>One class carries the drop:</b> cancer stroma, which the model often calls smooth muscle. Stain augmentation added +0.15 points against a +1.0 target and was not adopted.</p>
+<div class="foot"><span>Project 4 of 5</span><span>github.com/aryan9-6-5/MedTech-Suite</span></div>
+</body></html>
