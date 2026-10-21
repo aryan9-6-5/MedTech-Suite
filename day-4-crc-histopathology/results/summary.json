@@ -1,0 +1,146 @@
+{
+  "min_gain_macro_f1": 0.01,
+  "runs": {
+    "A_seed42": {
+      "internal_test": {
+        "accuracy": 0.9962222222222222,
+        "macro_f1": 0.9962221959517089,
+        "balanced_accuracy": 0.9962222222222221,
+        "ece": 0.04220066826211084,
+        "recall": {
+          "ADI": 1.0,
+          "BACK": 1.0,
+          "DEB": 0.998,
+          "LYM": 1.0,
+          "MUC": 0.996,
+          "MUS": 0.988,
+          "NORM": 0.994,
+          "STR": 0.992,
+          "TUM": 0.998
+        }
+      },
+      "external": {
+        "accuracy": 0.9767409470752089,
+        "macro_f1": 0.9663031538018723,
+        "balanced_accuracy": 0.9654329815445925,
+        "ece": 0.035864838791756906,
+        "recall": {
+          "ADI": 0.9948,
+          "BACK": 1.0,
+          "DEB": 1.0,
+          "LYM": 0.9984,
+          "MUC": 0.9836,
+          "MUS": 0.9882,
+          "NORM": 0.9825,
+          "STR": 0.7577,
+          "TUM": 0.9838
+        }
+      },
+      "external_macro_f1_ci95_patch_bootstrap": [
+        0.9605792505172969,
+        0.9713986760082105
+      ]
+    },
+    "A_seed7": {
+      "internal_test": {
+        "accuracy": 0.9973333333333333,
+        "macro_f1": 0.9973348549551218,
+        "balanced_accuracy": 0.9973333333333332,
+        "ece": 0.0412794874045584,
+        "recall": {
+          "ADI": 1.0,
+          "BACK": 1.0,
+          "DEB": 0.992,
+          "LYM": 1.0,
+          "MUC": 0.996,
+          "MUS": 0.994,
+          "NORM": 0.996,
+          "STR": 0.998,
+          "TUM": 1.0
+        }
+      },
+      "external": {
+        "accuracy": 0.9775766016713092,
+        "macro_f1": 0.9683348410134145,
+        "balanced_accuracy": 0.9672736177561312,
+        "ece": 0.034010042341472695,
+        "recall": {
+          "ADI": 0.9963,
+          "BACK": 1.0,
+          "DEB": 1.0,
+          "LYM": 1.0,
+          "MUC": 0.9845,
+          "MUS": 0.9831,
+          "NORM": 0.9811,
+          "STR": 0.7791,
+          "TUM": 0.9813
+        }
+      },
+      "external_macro_f1_ci95_patch_bootstrap": [
+        0.9627199646625483,
+        0.9726563589347837
+      ]
+    },
+    "B_seed42": {
+      "internal_test": {
+        "accuracy": 0.996,
+        "macro_f1": 0.9959992649303493,
+        "balanced_accuracy": 0.996,
+        "ece": 0.04111332913902073,
+        "recall": {
+          "ADI": 1.0,
+          "BACK": 1.0,
+          "DEB": 0.992,
+          "LYM": 1.0,
+          "MUC": 0.994,
+          "MUS": 0.988,
+          "NORM": 0.992,
+          "STR": 0.998,
+          "TUM": 1.0
+        }
+      },
+      "external": {
+        "accuracy": 0.9768802228412257,
+        "macro_f1": 0.9675664611880763,
+        "balanced_accuracy": 0.967538987854422,
+        "ece": 0.035378717164143224,
+        "recall": {
+          "ADI": 0.9978,
+          "BACK": 1.0,
+          "DEB": 1.0,
+          "LYM": 0.9984,
+          "MUC": 0.9826,
+          "MUS": 0.9155,
+          "NORM": 0.9825,
+          "STR": 0.8432,
+          "TUM": 0.9878
+        }
+      },
+      "external_macro_f1_ci95_patch_bootstrap": [
+        0.9627330534626514,
+        0.9717792681320118
+      ]
+    },
+    "B_seed7": {
+      "note": "the notebook printout of summary.json was cut off inside this entry, so only the aggregate figures below are available for it"
+    }
+  },
+  "aggregate_from_evaluate_output": {
+    "A_mean": {
+      "internal_macro_f1": 0.9968,
+      "external_macro_f1": 0.9673,
+      "external_accuracy": 0.9772
+    },
+    "B_mean": {
+      "internal_macro_f1": 0.9964,
+      "external_macro_f1": 0.9689,
+      "external_accuracy": 0.9779
+    },
+    "B_minus_A_external_macro_f1_by_seed": {
+      "42": 0.0013,
+      "7": 0.0018
+    },
+    "criterion_met": false
+  },
+  "decision": "Pre-registered criterion (B beats A by at least 0.010 external macro-F1 in the mean and in both seeds) NOT met: gains were +0.0013 and +0.0018."
+}
