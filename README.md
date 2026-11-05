@@ -8,4 +8,4 @@ Five days, five medical-AI projects. One directory per day.
 | 2 | [HAM10000 skin lesion classifier](day-2-ham10000-skin-lesion-classifier) | done, test macro AUROC 0.928 (split by lesion) |
 | 3 | [CHB-MIT seizure detection](day-3-chbmit-seizure-detection) | done, honest patient-level evaluation |
 | 4 | [Colorectal histopathology, external validation](day-4-crc-histopathology) | done, external macro-F1 0.967 |
-| 5 | [Polyp segmentation, cross-dataset testing](day-5-polyp-segmentation) | scaffolded, not run yet |
+| 5 | [Polyp segmentation, cross-dataset testing](day-5-polyp-segmentation) | done, external Dice 0.770 (ConvNeXt-Tiny) vs 0.690 (ResNet-34) |

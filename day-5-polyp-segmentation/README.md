@@ -42,6 +42,22 @@ Colab (T4): open `train_colab.ipynb` and run the cells in order (the datasets do
 
 Research prototype, not a medical device.
 
-## Results
+## Results (2 seeds per encoder, external sets used once per run)
 
-Not run yet. This section is filled in after the four runs.
+Mean per-image Dice, average of two seeds (IoU and per-seed numbers are in `results/summary.json`):
+
+| | Kvasir-SEG internal test | CVC-ClinicDB (unseen) | ETIS-Larib (unseen) | External Dice |
+|---|---|---|---|---|
+| ResNet-34 U-Net | 0.893 | 0.843 | 0.538 | 0.690 |
+| ConvNeXt-Tiny U-Net | 0.909 | 0.859 | 0.681 | **0.770** |
+
+**Pre-registered decision: met.** ConvNeXt beat ResNet-34 on external Dice by +0.046 (seed 42) and +0.114 (seed 7); the target was at least +0.010 on average and in both seeds. ConvNeXt is therefore reported as the better encoder for unseen datasets.
+
+**Where the gain is.** Almost all of it is on ETIS-Larib (+0.143 Dice on average). On CVC-ClinicDB it is +0.016, positive in both seeds but small. Both encoders lose a lot when moving off Kvasir-SEG: ResNet-34 falls from 0.893 to 0.538 on ETIS-Larib, ConvNeXt from 0.909 to 0.681. The gap to unseen datasets is the result; the internal score is not. In the qualitative figure (`results/overlays_etis.png`) ResNet-34 often adds large false regions away from the polyp on ETIS-Larib frames, which ConvNeXt mostly avoids.
+
+**Caveats.**
+- Two seeds per encoder. ConvNeXt's ETIS-Larib Dice differs a lot between seeds (0.627 and 0.736), so the size of the gain is uncertain even though its direction agrees in both seeds.
+- "Stronger encoder" is not isolated: ConvNeXt-Tiny also has more parameters (31.9M against 24.4M) and a different pretraining recipe. This shows ConvNeXt-Tiny did better here, not that a bigger or newer encoder always does.
+- ETIS-Larib has 196 images (three pairs are identical images with different masks); CVC-ClinicDB has 612 frames from 29 sequences, so frames within a sequence are correlated and image-level bootstrap intervals (in `summary.json`) are too narrow. External Dice weights the two sets equally.
+- Dice is measured on images resized to 352x352, not at native resolution. The final-epoch model is used; nothing was tuned on the external sets. Training took about 5 min (ResNet-34) and 8 min (ConvNeXt-Tiny) per run on a T4.
+- Research prototype, not a medical device. The training log is in `results/run_log.txt`.

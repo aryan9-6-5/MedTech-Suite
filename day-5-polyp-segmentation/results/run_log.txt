@@ -1,0 +1,208 @@
+===== notebook cell 3 output =====
+downloading https://datasets.simula.no/downloads/kvasir-seg.zip -> /content/MedTech-Suite/day-5-polyp-segmentation/data/_raw/kvasir-seg.zip
+curl: (60) SSL certificate problem: unable to get local issuer certificate
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the web page mentioned above.
+downloading https://www.dropbox.com/s/p5qe9eotetjnbmq/CVC-ClinicDB.rar?dl=1 -> /content/MedTech-Suite/day-5-polyp-segmentation/data/_raw/cvc/CVC-ClinicDB.rar
+reading the ETIS-Larib members of https://zenodo.org/records/5579392/files/PolypDataset.zip?download=1 by range requests
+wrote 392 ETIS-Larib files
+kvasir: 1000 image/mask pairs
+cvc: 612 image/mask pairs
+etis: 196 image/mask pairs
+external sets match manifest.json
+kvasir train=800 val=100 test=100; cvc=612 etis=196
+kvasir: mean polyp area fraction 0.154
+cvc: mean polyp area fraction 0.092
+etis: mean polyp area fraction 0.045
+
+===== notebook cell 4 output =====
+external sets match manifest.json
+enc=resnet34 seed=42 train=800 val=100 test=100 cvc=612 etis=196
+Downloading: "https://download.pytorch.org/models/resnet34-b627a593.pth" to /root/.cache/torch/hub/checkpoints/resnet34-b627a593.pth
+100% 83.3M/83.3M [00:00<00:00, 189MB/s]
+parameters: 24.4M
+epoch 1/40 loss 1.2436 (10s)
+epoch 2/40 loss 0.7634 (17s)
+epoch 3/40 loss 0.4323 (24s)
+epoch 4/40 loss 0.3606 (31s)
+epoch 5/40 loss 0.3291 (38s)
+epoch 6/40 loss 0.3003 (45s)
+epoch 7/40 loss 0.2746 (53s)
+epoch 8/40 loss 0.2797 (60s)
+epoch 9/40 loss 0.2576 (67s)
+epoch 10/40 loss 0.2562 (75s)
+epoch 11/40 loss 0.2402 (82s)
+epoch 12/40 loss 0.2382 (90s)
+epoch 13/40 loss 0.2204 (97s)
+epoch 14/40 loss 0.2038 (105s)
+epoch 15/40 loss 0.1919 (113s)
+epoch 16/40 loss 0.1841 (121s)
+epoch 17/40 loss 0.2011 (128s)
+epoch 18/40 loss 0.1765 (136s)
+epoch 19/40 loss 0.1676 (144s)
+epoch 20/40 loss 0.1682 (152s)
+epoch 21/40 loss 0.1403 (161s)
+epoch 22/40 loss 0.1584 (169s)
+epoch 23/40 loss 0.1398 (177s)
+epoch 24/40 loss 0.1298 (185s)
+epoch 25/40 loss 0.1254 (193s)
+epoch 26/40 loss 0.1329 (201s)
+epoch 27/40 loss 0.1243 (209s)
+epoch 28/40 loss 0.1186 (217s)
+epoch 29/40 loss 0.1191 (225s)
+epoch 30/40 loss 0.1063 (233s)
+epoch 31/40 loss 0.1003 (241s)
+epoch 32/40 loss 0.0972 (249s)
+epoch 33/40 loss 0.0955 (257s)
+epoch 34/40 loss 0.1014 (265s)
+epoch 35/40 loss 0.0974 (273s)
+epoch 36/40 loss 0.0934 (281s)
+epoch 37/40 loss 0.0911 (289s)
+epoch 38/40 loss 0.0942 (298s)
+epoch 39/40 loss 0.0940 (306s)
+epoch 40/40 loss 0.0898 (314s)
+saved predictions
+external sets match manifest.json
+enc=convnext seed=42 train=800 val=100 test=100 cvc=612 etis=196
+Downloading: "https://download.pytorch.org/models/convnext_tiny-983f1562.pth" to /root/.cache/torch/hub/checkpoints/convnext_tiny-983f1562.pth
+100% 109M/109M [00:00<00:00, 150MB/s]  
+parameters: 31.9M
+epoch 1/40 loss 1.2895 (19s)
+epoch 2/40 loss 0.8607 (32s)
+epoch 3/40 loss 0.4394 (44s)
+epoch 4/40 loss 0.3132 (57s)
+epoch 5/40 loss 0.2797 (69s)
+epoch 6/40 loss 0.2452 (82s)
+epoch 7/40 loss 0.2094 (94s)
+epoch 8/40 loss 0.2190 (106s)
+epoch 9/40 loss 0.1884 (119s)
+epoch 10/40 loss 0.1713 (131s)
+epoch 11/40 loss 0.1840 (144s)
+epoch 12/40 loss 0.1659 (156s)
+epoch 13/40 loss 0.1343 (169s)
+epoch 14/40 loss 0.1373 (181s)
+epoch 15/40 loss 0.1384 (193s)
+epoch 16/40 loss 0.1177 (206s)
+epoch 17/40 loss 0.1243 (218s)
+epoch 18/40 loss 0.1024 (231s)
+epoch 19/40 loss 0.1087 (243s)
+epoch 20/40 loss 0.1155 (256s)
+epoch 21/40 loss 0.0976 (268s)
+epoch 22/40 loss 0.0879 (280s)
+epoch 23/40 loss 0.1006 (293s)
+epoch 24/40 loss 0.0853 (305s)
+epoch 25/40 loss 0.0840 (318s)
+epoch 26/40 loss 0.0806 (330s)
+epoch 27/40 loss 0.0719 (342s)
+epoch 28/40 loss 0.0716 (355s)
+epoch 29/40 loss 0.0749 (367s)
+epoch 30/40 loss 0.0702 (380s)
+epoch 31/40 loss 0.0694 (392s)
+epoch 32/40 loss 0.0698 (405s)
+epoch 33/40 loss 0.0656 (417s)
+epoch 34/40 loss 0.0702 (429s)
+epoch 35/40 loss 0.0648 (442s)
+epoch 36/40 loss 0.0651 (454s)
+epoch 37/40 loss 0.0643 (467s)
+epoch 38/40 loss 0.0656 (479s)
+epoch 39/40 loss 0.0623 (491s)
+epoch 40/40 loss 0.0631 (504s)
+saved predictions
+external sets match manifest.json
+enc=resnet34 seed=7 train=800 val=100 test=100 cvc=612 etis=196
+parameters: 24.4M
+epoch 1/40 loss 1.3651 (9s)
+epoch 2/40 loss 0.8649 (17s)
+epoch 3/40 loss 0.4709 (25s)
+epoch 4/40 loss 0.3701 (33s)
+epoch 5/40 loss 0.3397 (41s)
+epoch 6/40 loss 0.3067 (49s)
+epoch 7/40 loss 0.2708 (57s)
+epoch 8/40 loss 0.2777 (65s)
+epoch 9/40 loss 0.2517 (73s)
+epoch 10/40 loss 0.2419 (81s)
+epoch 11/40 loss 0.2278 (89s)
+epoch 12/40 loss 0.2180 (97s)
+epoch 13/40 loss 0.2401 (105s)
+epoch 14/40 loss 0.2385 (114s)
+epoch 15/40 loss 0.2116 (122s)
+epoch 16/40 loss 0.1928 (130s)
+epoch 17/40 loss 0.1875 (138s)
+epoch 18/40 loss 0.1685 (146s)
+epoch 19/40 loss 0.1664 (154s)
+epoch 20/40 loss 0.1555 (162s)
+epoch 21/40 loss 0.1534 (170s)
+epoch 22/40 loss 0.1390 (178s)
+epoch 23/40 loss 0.1387 (186s)
+epoch 24/40 loss 0.1365 (194s)
+epoch 25/40 loss 0.1239 (203s)
+epoch 26/40 loss 0.1218 (211s)
+epoch 27/40 loss 0.1149 (219s)
+epoch 28/40 loss 0.1195 (227s)
+epoch 29/40 loss 0.1114 (235s)
+epoch 30/40 loss 0.1072 (243s)
+epoch 31/40 loss 0.1020 (251s)
+epoch 32/40 loss 0.0979 (259s)
+epoch 33/40 loss 0.0998 (267s)
+epoch 34/40 loss 0.0949 (275s)
+epoch 35/40 loss 0.1017 (283s)
+epoch 36/40 loss 0.0954 (291s)
+epoch 37/40 loss 0.0963 (299s)
+epoch 38/40 loss 0.0947 (307s)
+epoch 39/40 loss 0.0928 (315s)
+epoch 40/40 loss 0.0969 (323s)
+saved predictions
+external sets match manifest.json
+enc=convnext seed=7 train=800 val=100 test=100 cvc=612 etis=196
+parameters: 31.9M
+epoch 1/40 loss 1.3029 (15s)
+epoch 2/40 loss 0.8476 (28s)
+epoch 3/40 loss 0.4100 (40s)
+epoch 4/40 loss 0.3118 (53s)
+epoch 5/40 loss 0.2640 (65s)
+epoch 6/40 loss 0.2378 (78s)
+epoch 7/40 loss 0.2290 (90s)
+epoch 8/40 loss 0.2099 (102s)
+epoch 9/40 loss 0.2050 (115s)
+epoch 10/40 loss 0.1833 (127s)
+epoch 11/40 loss 0.1555 (140s)
+epoch 12/40 loss 0.1699 (152s)
+epoch 13/40 loss 0.1608 (165s)
+epoch 14/40 loss 0.1596 (177s)
+epoch 15/40 loss 0.1385 (189s)
+epoch 16/40 loss 0.1385 (202s)
+epoch 17/40 loss 0.1506 (214s)
+epoch 18/40 loss 0.1385 (227s)
+epoch 19/40 loss 0.1084 (239s)
+epoch 20/40 loss 0.1126 (251s)
+epoch 21/40 loss 0.1010 (264s)
+epoch 22/40 loss 0.0937 (276s)
+epoch 23/40 loss 0.0990 (289s)
+epoch 24/40 loss 0.0961 (301s)
+epoch 25/40 loss 0.0825 (313s)
+epoch 26/40 loss 0.0816 (326s)
+epoch 27/40 loss 0.0768 (338s)
+epoch 28/40 loss 0.0778 (351s)
+epoch 29/40 loss 0.0751 (363s)
+epoch 30/40 loss 0.0760 (376s)
+epoch 31/40 loss 0.0727 (388s)
+epoch 32/40 loss 0.0716 (400s)
+epoch 33/40 loss 0.0700 (413s)
+epoch 34/40 loss 0.0682 (425s)
+epoch 35/40 loss 0.0670 (438s)
+epoch 36/40 loss 0.0667 (450s)
+epoch 37/40 loss 0.0651 (463s)
+epoch 38/40 loss 0.0661 (475s)
+epoch 39/40 loss 0.0670 (488s)
+epoch 40/40 loss 0.0689 (500s)
+saved predictions
+
+===== notebook cell 5 output =====
+external sets match manifest.json
+encoder     kvasir_test          cvc         etis   external
+resnet34         0.8927       0.8430       0.5378     0.6904
+convnext         0.9094       0.8590       0.6811     0.7700
+Pre-registered criterion (ConvNeXt beats ResNet-34 by at least 0.010 external Dice in the mean and in both seeds) MET: gains were +0.0456 and +0.1137.

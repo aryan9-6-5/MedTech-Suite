@@ -21,6 +21,6 @@ for j, i in enumerate(idx):
         a.set_xticks([]); a.set_yticks([])
         if j == 0:
             a.set_ylabel(title)
-fig.suptitle("ETIS-Larib (external, unseen during training): ground truth green, prediction red", y=0.94)
-fig.tight_layout()
+fig.suptitle("ETIS-Larib (external, unseen during training): ground truth green, prediction red")
+fig.tight_layout(rect=[0, 0, 1, 0.95])
 fig.savefig(ROOT / "results" / "overlays_etis.png", dpi=110)
