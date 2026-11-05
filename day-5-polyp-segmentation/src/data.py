@@ -51,12 +51,33 @@ SOURCES = {
 
 
 # ---------------------------------------------------------------------------------------------------------- download helpers
+# datasets.simula.no sends a stale certificate chain: its certificate was issued by the Sectigo R36 intermediate, which the server does not send.
+# Browsers and Windows fetch it on their own; OpenSSL (Linux / Colab) does not. The intermediate is fetched from the issuer's published
+# URL and added to the trusted roots for this one download. OpenSSL still checks its signature and the whole chain, so verification stays on.
+SIMULA_INTERMEDIATE = "http://crt.sectigo.com/SectigoPublicServerAuthenticationCADVR36.crt"
+
+
+def _ca_bundle_with_intermediate():
+    import ssl
+    der = urllib.request.urlopen(SIMULA_INTERMEDIATE, timeout=60).read()
+    cafile = ssl.get_default_verify_paths().cafile
+    if not cafile or not Path(cafile).exists():
+        import certifi
+        cafile = certifi.where()
+    out = DATA / "_raw" / "ca-bundle-simula.pem"
+    out.write_text(Path(cafile).read_text() + "\n" + ssl.DER_cert_to_PEM_cert(der))
+    return out
+
+
 def _download(url, dest):
     dest.parent.mkdir(parents=True, exist_ok=True)
     print(f"downloading {url} -> {dest}", flush=True)
-    # curl, not urllib: the Simula server sends an incomplete certificate chain that curl completes but Python's ssl rejects.
-    # Certificate checking stays on.
-    subprocess.run(["curl", "-fsSL", "-o", str(dest), url], check=True)
+    # curl, not urllib: Python's ssl cannot complete Simula's chain on Windows. Certificate checking stays on in every path.
+    cmd = ["curl", "-fsSL", "-o", str(dest), url]
+    r = subprocess.run(cmd)
+    if r.returncode == 60 and "simula.no" in url:             # 60 = certificate problem
+        r = subprocess.run(cmd[:1] + ["--cacert", str(_ca_bundle_with_intermediate())] + cmd[1:])
+    r.check_returncode()
     assert dest.stat().st_size > 0, f"{url}: empty download"
 
 
